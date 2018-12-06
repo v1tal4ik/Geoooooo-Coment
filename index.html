@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Geoooo Coment</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="map" class="container-map"></div>
+
+    <div class="window hide">
+        <div class="window-header">
+            <div class="text-content">
+                <i class="fas fa-map-marker-alt"></i>
+                <span class="address">Невський проспект, 78 , Санкт-Петербугрб</span>
+            </div>
+            <i class="fas fa-times" id="close"></i>
+        </div>
+        <div class="content_1 hide">
+            <div class="feedback-list">
+                <ul class="list">
+                    <li class="list-item">
+                        <div class="info">
+                            <span class="name">Віталій Суходольський</span>
+                            <span class="place">Красний Клуб</span>
+                            <span class="data">11.11.11</span>
+                        </div>
+                        <div class="text">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam nam in harum, eligendi ipsum dolore inventore fugit eius quam ad! Nisi in dolorem temporibus vero, perferendis aut porro accusantium quae consequatur deleniti possimus sint et eaque, praesentium! Sit minus porro, iusto dolore at libero natus nisi, cum veniam culpa quasi!
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="forma">
+                <h4 class="your-coment">Ваш коментар</h4>
+                <div class="coment-content">
+                    <input type="text" class="input" id="name" placeholder="Ваше імя" required>
+                    <input type="text" class="input" id="place" placeholder="Вкажіть місце" required>
+                    <textarea name="coment" id="coment" class="input" cols="30" rows="7" placeholder="Поділіться Вашими враженнями" required></textarea>
+                </div>
+            </div>
+            <button id="add-btn">Добавити</button>
+        </div>
+        <div class="content_2 hide">
+            <div class="feedback-list">
+                <ul class="list">
+                    <li class="list-item">
+                        <div class="info">
+                            <span class="name">Віталій Суходольський</span>
+                            <span class="place">Красний Клуб</span>
+                            <span class="data">11.11.11</span>
+                        </div>
+                        <div class="text">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam nam in harum, eligendi ipsum dolore inventore fugit eius quam ad! Nisi in dolorem temporibus vero, perferendis aut porro accusantium quae consequatur deleniti possimus sint et eaque, praesentium! Sit minus porro, iusto dolore at libero natus nisi, cum veniam culpa quasi!
+                        </div>
+                    </li>
+                    <li class="list-item">
+                        <div class="info">
+                            <span class="name">Віталій Суходольський</span>
+                            <span class="place">Красний Клуб</span>
+                            <span class="data">11.11.11</span>
+                        </div>
+                        <div class="text">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam nam in harum, eligendi ipsum dolore inventore fugit eius quam ad! Nisi in dolorem temporibus vero, perferendis aut porro accusantium quae consequatur deleniti possimus sint et eaque, praesentium! Sit minus porro, iusto dolore at libero natus nisi, cum veniam culpa quasi!
+                        </div>
+                    </li>
+                    <li class="list-item">
+                        <div class="info">
+                            <span class="name">Віталій Суходольський</span>
+                            <span class="place">Красний Клуб</span>
+                            <span class="data">11.11.11</span>
+                        </div>
+                        <div class="text">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam nam in harum, eligendi ipsum dolore inventore fugit eius quam ad! Nisi in dolorem temporibus vero, perferendis aut porro accusantium quae consequatur deleniti possimus sint et eaque, praesentium! Sit minus porro, iusto dolore at libero natus nisi, cum veniam culpa quasi!
+                        </div>
+                    </li>
+                    <li class="list-item">
+                        <div class="info">
+                            <span class="name">Віталій Суходольський</span>
+                            <span class="place">Красний Клуб</span>
+                            <span class="data">11.11.11</span>
+                        </div>
+                        <div class="text">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam nam in harum, eligendi ipsum dolore inventore fugit eius quam ad! Nisi in dolorem temporibus vero, perferendis aut porro accusantium quae consequatur deleniti possimus sint et eaque, praesentium! Sit minus porro, iusto dolore at libero natus nisi, cum veniam culpa quasi!
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <button id="add-coment-btn">Додати коментарій</button>
+        </div>
+    </div>
+
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=026e4496-0472-491f-893e-efdfb9ffc215&lang=ru_RU" type="text/javascript">
+    </script>
+    <script src="main.js"></script>
+</body>
+
+</html>

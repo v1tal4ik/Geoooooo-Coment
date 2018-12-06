@@ -1,0 +1,171 @@
+body{
+    background: #fff;
+}
+#map{
+    width: 1376px;
+    height: 800px;
+    margin: 0 auto;
+}
+
+
+
+.window{
+    width: 370px;
+    height: 550px;
+    background: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 15px;
+}
+
+.hide{
+    display: none;
+}
+
+
+/****** Window-header****/
+.window-header{
+    background: #ff8663;
+    color: #ffffff;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+}
+
+.address{
+    margin-left: 5px;
+}
+
+.fa-times{
+    font-size: 18px;
+}
+
+
+
+
+
+/***** feedback-list ******/
+.list{
+    list-style: none;
+    padding: 0 20px 10px 20px;
+    overflow: auto;
+    height: 130px;
+    font-size: 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.list-item {
+    padding-bottom: 10px;
+}
+
+.info{
+    white-space: nowrap;
+}
+
+.place , .data{
+    color: #848484;
+}
+.name{
+    font-weight: bold;
+}
+
+/****** Scroll Bar *****/
+::-webkit-scrollbar-button {
+background-image:url('');
+background-repeat:no-repeat;
+width:5px;
+height:0px
+}
+
+::-webkit-scrollbar-track {
+background-color:#ffffff
+}
+
+::-webkit-scrollbar-thumb {
+-webkit-border-radius: 0px;
+border-radius: 0px;
+background-color:#c4c4c4;
+}
+
+::-webkit-scrollbar-thumb:hover{
+background-color:#c4c4c4;
+}
+
+::-webkit-resizer{
+background-image:url('');
+background-repeat:no-repeat;
+width:4px;
+height:0px
+}
+
+::-webkit-scrollbar{
+width: 4px;
+}
+
+
+
+/**** Forma ******/
+.forma{
+    padding-left: 20px;
+}
+.your-coment{
+    color: #ff8663;
+    margin-bottom: 10px;
+}
+.input{
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border: 1px solid #c4c4c4;
+    outline: none;
+}
+.input:hover{
+    border-color: #ff8663;
+}
+
+#add-btn, #add-coment-btn{
+    float: right;
+    margin-right: 12px;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    background: #ff8663;
+    border: none;
+    color: #fff;
+    outline: none;
+}
+
+#add-btn:hover, #add-coment-btn:hover{
+   background: #cc6b50;
+    color: #d6d6d6;
+}
+
+
+#add-btn:focus, #add-coment-btn:focus{
+    animation: radial-pulse 1s ease-out;
+}
+
+@keyframes radial-pulse {
+  0% {
+    box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.5);
+  }
+ 
+  100% {
+    box-shadow: 0 0 0 40px rgba(0, 0, 0, 0);
+  }
+}
+
+
+
+
+/*********** Content 2 ******************************/
+.content_2 .list {
+    height: 380px;
+}
+
