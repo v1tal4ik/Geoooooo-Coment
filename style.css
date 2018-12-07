@@ -64,7 +64,7 @@ body{
 }
 
 .info{
-    white-space: nowrap;
+    width: 340px;
 }
 
 .place , .data{
