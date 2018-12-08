@@ -1,16 +1,7 @@
 ymaps.ready(init);
 
 
-
-var all_placemarks = [
-    {
-        coords: [50.40, 30.20],
-        name: 'viyaliy',
-        place: 'Европейский',
-        data: '06.12.2018',
-        coment: 'dcd'
-    }
-]
+var obj = {};
 var add_btn        = document.getElementById('add-btn');
 var add_coment_btn = document.getElementById('add-coment-btn');
 var close_btn      = document.getElementById('close');
@@ -43,6 +34,8 @@ function init() {
     var clusterer = new ymaps.Clusterer({
         preset: 'islands#redClusterIcons',
         groupByCoordinates: false,
+        clusterDisableClickZoom: true,
+        openBalloonOnClick: false
     });
 
     /* Клік по кластеру */
@@ -53,26 +46,23 @@ function init() {
         if (type === 'cluster') {
             //клік по кластеру
             console.log('Це клік по кластеру');
-            let arr = clusterer.getGeoObjects();
-            for (let i = 0; i < arr.length; i++) {
-                let coordinates = arr[i].geometry._coordinates;
-                 let window = document.querySelector('.window');
-                let content_1 = document.querySelector('.content_1');
-                let content_2 = document.querySelector('.content_2');
-                window.classList.remove('hide');
-                content_1.classList.add('hide');
-                content_2.classList.remove('hide');
-                renderComents(2,coordinates);
+            let points = e.get('target').getGeoObjects();
+            let coordinates = e.get('target').geometry._coordinates;
+            let array_coordinates = [];
+            //відкривання модального вікна
+                for(let point of points){
+                    if(!(array_coordinates.includes(point.geometry._coordinates))){
+                    array_coordinates.push(point.geometry._coordinates);    
+                    }
             }
+            showListComents(' ',array_coordinates,true);
         }
 
         if (type === 'geoObject') {
             //клік по мітці
             console.log('Це клік по мітці');
             let coordinates = e.get('target').geometry._coordinates;
-            console.log('coordinates', coordinates);
             getAddress(coordinates).then((address) => {
-            console.log('address', address);
             //відкривання модального вікна
             showListComents(address,coordinates);
         });
@@ -91,9 +81,14 @@ function init() {
 
 
     //запис властивостей в обєкт
-    let obj = createObj(coords, name.value, place.value, data, coment.value);
-    all_placemarks.push(obj);    
-    renderComents(1,coords);
+        new_Coment = createObj(name.value, place.value, data, coment.value);
+        if (obj[coords]) {
+            obj[coords].push(new_Coment);
+        } else {
+            obj[coords] = [];
+            obj[coords].push(new_Coment);
+        }  
+        renderComents(1,coords);
     
     //додавання мітки
     let point = createPlacemark(coords);
@@ -123,6 +118,38 @@ close_btn.addEventListener('click', e => {
     window.classList.add('hide');
 });
 
+/******** Arrow ***********/
+var right = document.getElementById('right');
+var left = document.getElementById('left');
+var counter = 0;
+right.addEventListener('click', e =>{
+    let list = document.querySelector('.content_2').querySelectorAll('.list-item');
+    list[counter].classList.add('hide');
+    list[counter+1].classList.remove('hide');
+    counter+=1;
+    //перевірка чи є далі слайди
+    if(counter === (list.length-1)){
+        right.classList.add('hide');
+        left.classList.remove('hide');
+    }else{
+        left.classList.remove('hide');
+    }
+    
+});
+
+left.addEventListener('click', e =>{
+   let list = document.querySelector('.content_2').querySelectorAll('.list-item');
+    list[counter].classList.add('hide');
+    list[counter-1].classList.remove('hide');
+    counter-=1;
+    //перевірка чи є далі слайди
+    if(counter === 0){
+        left.classList.add('hide');
+        right.classList.remove('hide');
+    }else{
+        right.classList.remove('hide');
+    }
+});
 
 
 
@@ -151,7 +178,7 @@ function showWindow(address,coordinates) {
 }
 
 //відкриття форми перегляду
-function showListComents(address,coordinates) {
+function showListComents(address,coordinates,select) {
     let window = document.querySelector('.window');
     let content_1 = document.querySelector('.content_1');
     let content_2 = document.querySelector('.content_2');
@@ -160,36 +187,40 @@ function showListComents(address,coordinates) {
     content_2.classList.remove('hide');
     
 
-    let list = document.querySelector('.content_2').querySelector('.list');
-    list.innerHTML = ' ';
     let address_span = document.querySelector('.address');
     address_span.textContent = address;
-    
-    renderComents(2,coordinates);
+    renderComents(2,coordinates,select);
     }
 
-function renderComents(number,coordinates){
-    let currentList;
-    
-    if(number === 1){
-        currentList = document.querySelector('.content_1').querySelector('.list');
+function renderComents(number, coordinates, select = false) {
+    let curentList;
+
+    //номер списку
+    if (number === 1) {
+        curentList = document.querySelector('.content_1').querySelector('.list');
     }
-    
-    if(number === 2){
-        currentList = document.querySelector('.content_2').querySelector('.list');
+
+    if (number === 2) {
+        curentList = document.querySelector('.content_2').querySelector('.list');
     }
-    
-    currentList.innerHTML = '';
-    
-    for (let array_all of all_placemarks) {
-        console.log('coordinates ', coordinates, ' ==== ', array_all.coords);
-        console.log('OBJECT ', array_all);
-        if (checkArrays(coordinates, array_all.coords)) {
-            let element = createLi(array_all.name, array_all.place, array_all.data, array_all.coment);
-//            address_span.textContent = array_all.place;
-            currentList.appendChild(element);
+    curentList.innerHTML = '';
+    //масив координат
+    if (select) {
+        //для всіх точок всі коментарі
+        for (let i = 0; i < coordinates.length; i++) {
+            for (let index of obj[coordinates[i]]) {
+                let element = createLi(index.name, index.place, index.data, index.coment)
+                curentList.appendChild(element);
+            }
+        }
+    } else {
+        //всі коментарі для даної точки
+        for (let index of obj[coordinates]) {
+            let element = createLi(index.name, index.place, index.data, index.coment)
+            curentList.appendChild(element);
         }
     }
+    clearList();
 }
 
 function getAddress(coords) {
@@ -251,9 +282,8 @@ function createLi(name, place, data, text) {
     return li;
 }
 
-function createObj(coords, name, place, data, coment) {
+function createObj(name, place, data, coment) {
     let obj = {};
-    obj.coords = coords;
     obj.name = name;
     obj.place = place;
     obj.data = data;
@@ -262,16 +292,16 @@ function createObj(coords, name, place, data, coment) {
     return obj;
 }
 
-function checkArrays(array_check, array) {
-    if (array_check[0] === array[0] && array_check[1] === array[1]) {
-        console.log(array_check[0], ' === ', array[0]);
-        console.log(array_check[1], ' === ', array[1]);
-        console.log('return TRUE');
-        return true;
-    } else {
-        console.log(array_check[0], ' === ', array[0]);
-        console.log(array_check[1], ' === ', array[1]);
-        console.log('return False');
-        return false;
+function clearList(){
+    console.log('work');
+    let list = document.querySelector('.content_2').querySelectorAll('.list-item');
+    for(let i=1; i <list.length;i++){
+        list[i].classList.add('hide');
+    }
+    if(list.length !== 1){
+        right.classList.remove('hide');
+    }else{
+        right.classList.add('hide');
     }
 }
+
