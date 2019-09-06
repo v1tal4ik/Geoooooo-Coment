@@ -56,7 +56,6 @@ body{
 /***** feedback-list ******/
 .list{
     list-style: none;
-    padding: 0 20px 10px 20px;
     overflow: auto;
     height: 130px;
     font-size: 16px;
@@ -64,11 +63,19 @@ body{
 }
 
 .list-item {
-    padding-bottom: 10px;
+    width: 100%;
+    padding: 15px 0;
+    border-bottom: 1px solid #c9c9c9;
 }
 
 .info{
+    padding-left: 10px;
     width: 340px;
+}
+
+.text {
+    text-align: left;
+    padding: 10px 20px;
 }
 
 .place , .data{
@@ -136,7 +143,7 @@ width: 4px;
 #add-btn, #add-coment-btn{
     float: right;
     margin-right: 12px;
-    margin-bottom: 20px;
+    margin: 20px;
     padding: 10px 15px;
     border-radius: 20px;
     background: #ff8663;
@@ -177,10 +184,7 @@ width: 4px;
 
 /*********** Content 2 ******************************/
 .content_2 .list {
-    height: 380px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    height: 400px;
 }
 
 .content_2 .info{
@@ -204,7 +208,6 @@ width: 4px;
     text-align: left;
     padding: 10px 20px;
     font-size: 18px;
-    height: 100px;
 } 
 
 .arrow{
